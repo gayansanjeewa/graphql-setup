@@ -14,7 +14,10 @@ const dbName = "graphExample";
 // help to debug mongoose
 mongoose.set("debug", true);
 
-mongoose.connect(`mongodb://${MONGO_URL}:${MONGO_PORT}/${dbName}`);
+mongoose.connect(
+	`mongodb://${MONGO_URL}:${MONGO_PORT}/${dbName}`,
+	{ useNewUrlParser: true, useUnifiedTopology: true }
+);
 
 const app = express();
 
@@ -38,6 +41,6 @@ const server = new ApolloServer({
 	}
 });
 
-server.listen().then(({ url }) => {
+server.listen({ port: 4001 }).then(({ url }) => {
 	console.log(`🚀 Server ready at ${url}`);
 });
